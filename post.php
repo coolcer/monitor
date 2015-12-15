@@ -16,14 +16,14 @@ $date = date("Y-m-d H:i:s");
 $check_date = strtotime (date ("H:i:s"));
 
 //判定SSID是否合法
-if ($SSID == "110monitor110"){
+if ($SSID == "Okay110monitor110"){
 			
 	//选择数据库连接
 	$db_link = mysql_connect($db_host, $db_user, $db_pass);// or die(message(mysql_error()));
 
     //选择数据库
     mysql_select_db($db_name, $db_link);// or die(message(mysql_error()));
-        
+/*        
 	//获取上次更新时间
 	$sql_setect_uptime =  "select UP_TIME FROM m_sub WHERE hostname = '$HOSTNAME'";
 	$result = mysql_query($sql_setect_uptime, $db_link);
@@ -48,6 +48,7 @@ if ($SSID == "110monitor110"){
 		 //如果结果小于2，则本地状态变量为normal
 		 $CHECK_STATUS = "normal";   
 	 }
+*/
 	//组合每个表的字段
 	$values_use = "'$IP','$HOSTNAME','$CPU_USE','$MEM_USE','$DISK_USE','$LOAD_USE','$BAND','$STATUS','$date'";
 	$fileds_use = "IP,HOSTNAME,CPU_USE,MEM_USE,DISK_USE,LOAD_USE,BAND,STATUS,UP_TIME";
@@ -55,8 +56,8 @@ if ($SSID == "110monitor110"){
 	$values_basic = "'$IP','$HOSTNAME','$CPU','$MEM','$DISK','$date'";
 	$fileds_basic = "IP,HOSTNAME,CPU,MEM,DISK,UP_TIME";
 
-	$values_sub = "'$IP','$HOSTNAME','$SUB','$date','$CHECK_STATUS'";
-	$fileds_sub = "IP,HOSTNAME,SUB,UP_TIME,CHECK_STATUS";
+	$values_sub = "'$IP','$HOSTNAME','$SUB','$date'";
+	$fileds_sub = "IP,HOSTNAME,SUB,UP_TIME";
 	
 	//判定变量是否为空
 	if(empty($PORT80)) {
@@ -103,7 +104,7 @@ if ($SSID == "110monitor110"){
     //echo "$sql";
              
     //更新订阅及状态
-    $sql_sub = "insert into  m_sub ($fileds_sub) values ($values_sub) on duplicate key update IP='$IP',CHECK_STATUS='$CHECK_STATUS',SUB='$SUB',UP_TIME='$date'";
+    $sql_sub = "insert into  m_sub ($fileds_sub) values ($values_sub) on duplicate key update IP='$IP',SUB='$SUB',UP_TIME='$date'";
     //echo "$sql";
     $result = mysql_query($sql_sub, $db_link);// or die(message(mysql_error()));
 
