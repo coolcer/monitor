@@ -16,7 +16,7 @@ $date = date("Y-m-d H:i:s");
 $check_date = strtotime (date ("H:i:s"));
 
 //判定SSID是否合法
-if ($SSID == "Okay110monitor110"){
+if ($SSID == "110monitor110"){
 			
 	//选择数据库连接
 	$db_link = mysql_connect($db_host, $db_user, $db_pass);// or die(message(mysql_error()));
